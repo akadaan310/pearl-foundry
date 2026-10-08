@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aanebed.vercel.app/schemas/pearl.schema.json",
+  "title": "Pearl record (pearl/1)",
+  "description": "A Pearl: a validated document carried by a URL. Its id is p_ followed by the first 80 bits of sha256(canonical JSON of this object without id/digest), in lower-case Crockford base32. The id is content addressing, not authorship or access control.",
+  "type": "object",
+  "required": [
+    "format",
+    "type",
+    "title",
+    "by",
+    "for",
+    "session",
+    "blocks"
+  ],
+  "properties": {
+    "format": {
+      "const": "pearl/1"
+    },
+    "type": {
+      "enum": [
+        "experience",
+        "continuity",
+        "prompt",
+        "workflow",
+        "research",
+        "computation",
+        "collection",
+        "project",
+        "notes"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "the composer, as asserted"
+    },
+    "for": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "session": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "a label the composing session chose, as asserted"
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "h",
+              "p",
+              "note",
+              "quote",
+              "list",
+              "steps",
+              "facts",
+              "table",
+              "flow",
+              "code",
+              "x",
+              "research",
+              "link",
+              "prompt",
+              "claim",
+              "pearl",
+              "c",
+              "choice"
+            ]
+          }
+        }
+      },
+      "maxItems": 40
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^p_[0-9abcdefghjkmnpqrstvwxyz]{16}$"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "from": {
+      "type": "string",
+      "pattern": "^p_[0-9abcdefghjkmnpqrstvwxyz]{16}$",
+      "description": "parent Pearl id, present only on forks and remixes (lineage as asserted; not authorship). Included in the canonical form only when present."
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aanebed.vercel.app/schemas/pearl-export.schema.json",
+  "title": "Pearl library export (pearl-export v1)",
+  "description": "A browser-local Pearl library, exported. On import every Pearl is re-parsed and its digest and id recomputed; records that do not match are rejected. Major versions other than 1 are refused.",
+  "type": "object",
+  "required": [
+    "format",
+    "version",
+    "exported_at",
+    "pearls",
+    "spaces",
+    "projects",
+    "notes",
+    "tasks"
+  ],
+  "properties": {
+    "format": {
+      "const": "pearl-export"
+    },
+    "version": {
+      "const": 1
+    },
+    "exported_at": {
+      "type": "string"
+    },
+    "scope": {
+      "enum": [
+        "workspace",
+        "space",
+        "project"
+      ]
+    },
+    "note": {
+      "type": "string"
+    },
+    "pearls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "digest",
+          "pearl",
+          "name",
+          "tags",
+          "pinned",
+          "spaceId",
+          "source",
+          "savedAt",
+          "modifiedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^p_[0-9abcdefghjkmnpqrstvwxyz]{16}$"
+          },
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "pearl": {
+            "$ref": "https://aanebed.vercel.app/schemas/pearl.schema.json"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pinned": {
+            "type": "boolean"
+          },
+          "spaceId": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source": {
+            "enum": [
+              "pasted",
+              "opened",
+              "imported",
+              "edited"
+            ]
+          },
+          "origin": {
+            "type": "string"
+          },
+          "derivedFrom": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "savedAt": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "maxItems": 5000
+    },
+    "spaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "spaceId"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "spaceId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "target",
+          "text"
+        ]
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "text",
+          "done"
+        ]
+      }
+    }
+  }
+}

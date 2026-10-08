@@ -1,0 +1,44 @@
+{
+  "name": "pearl-foundry",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pearl Foundry \u2014 the foundry that mints Pearls. Clone your AI, take its DNA URL anywhere. Research by Abed Kadaan, Agency TM.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run test:unit",
+    "test:unit": "tsx --test tests/unit/*.test.ts",
+    "test:browser": "playwright test",
+    "test:ingress": "tsx scripts/ingress.ts",
+    "test:links": "tsx scripts/check-links.ts",
+    "verify": "npm run typecheck && npm run test:unit && npm run build",
+    "test:smoke": "tsx scripts/smoke.ts"
+  },
+  "dependencies": {
+    "next": "16.3.8",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.0",
+    "@playwright/test": "1.56.1",
+    "@tailwindcss/postcss": "4.1.14",
+    "@types/node": "22.18.8",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
+    "tailwindcss": "4.1.14",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "@axe-core/playwright": {
+      "playwright-core": "1.56.1"
+    }
+  }
+}

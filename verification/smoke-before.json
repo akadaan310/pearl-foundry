@@ -1,0 +1,218 @@
+{
+  "base": "https://aanebed.vercel.app",
+  "at": "2026-10-08T06:33:10.858Z",
+  "client": "Node.js fetch (a real HTTP client)",
+  "passed": "11/21",
+  "rows": [
+    {
+      "name": "home",
+      "url": "https://aanebed.vercel.app/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "redirect": null,
+      "bytes": 158795,
+      "outcome": "FAIL",
+      "problem": "missing “Bring your Pearl”"
+    },
+    {
+      "name": "compose",
+      "url": "https://aanebed.vercel.app/compose",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "redirect": null,
+      "bytes": 84737,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "prompts",
+      "url": "https://aanebed.vercel.app/prompts",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "redirect": null,
+      "bytes": 35868,
+      "outcome": "FAIL",
+      "problem": "status 404"
+    },
+    {
+      "name": "workspace",
+      "url": "https://aanebed.vercel.app/workspace",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "redirect": null,
+      "bytes": 35868,
+      "outcome": "FAIL",
+      "problem": "status 404"
+    },
+    {
+      "name": "research.json",
+      "url": "https://aanebed.vercel.app/research.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 65334,
+      "outcome": "FAIL",
+      "problem": "identity.url = https://abedkadaan.com"
+    },
+    {
+      "name": "verify/ingress.json",
+      "url": "https://aanebed.vercel.app/verify/ingress.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 14557,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "llms.txt",
+      "url": "https://aanebed.vercel.app/llms.txt",
+      "status": 200,
+      "type": "text/markdown; charset=utf-8",
+      "redirect": null,
+      "bytes": 9146,
+      "outcome": "FAIL",
+      "problem": "no link to the active origin"
+    },
+    {
+      "name": "ai.txt",
+      "url": "https://aanebed.vercel.app/ai.txt",
+      "status": 200,
+      "type": "text/plain; charset=utf-8",
+      "redirect": null,
+      "bytes": 7248,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": ".well-known/ai",
+      "url": "https://aanebed.vercel.app/.well-known/ai",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 20255,
+      "outcome": "FAIL",
+      "problem": "no Pearl section"
+    },
+    {
+      "name": "/x registry",
+      "url": "https://aanebed.vercel.app/x",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 2806,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "computation address",
+      "url": "https://aanebed.vercel.app/x/map/eca/90/8/state/5/next",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 2304,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "reported Claude Pearl (/e)",
+      "url": "https://aanebed.vercel.app/e?title=Abed+%26+Claude%2C+2am&by=Claude+Opus+5.5&session=claude-abed-2026-10-08&for=Abed&b=ai%3AClaude&b=huma…",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "redirect": null,
+      "bytes": 64585,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "reported Claude Pearl (/e.json): 12 blocks",
+      "url": "https://aanebed.vercel.app/e.json?title=Abed+%26+Claude%2C+2am&by=Claude+Opus+5.5&session=claude-abed-2026-10-08&for=Abed&b=ai%3AClaude&b…",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 2533,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "numbered blocks",
+      "url": "https://aanebed.vercel.app/e.json?title=N&b1=h:One&b2=p:Two&b3=list:a|b",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 438,
+      "outcome": "FAIL",
+      "problem": "0 blocks"
+    },
+    {
+      "name": "s= with literal \\n (3 lines)",
+      "url": "https://aanebed.vercel.app/e.json?s=h:Hello%5Cnp:World%5Cnlist:a%7Cb",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 522,
+      "outcome": "FAIL",
+      "problem": "1 blocks"
+    },
+    {
+      "name": "s= with %0A (3 lines)",
+      "url": "https://aanebed.vercel.app/e.json?s=h:Hello%0Ap:World%0Alist:a%7Cb",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 618,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "malformed Pearl → 422",
+      "url": "https://aanebed.vercel.app/e.json?title=",
+      "status": 422,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 507,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "oversized Pearl → 422",
+      "url": "https://aanebed.vercel.app/e.json?title=x&b1=p:yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy…",
+      "status": 422,
+      "type": "application/json; charset=utf-8",
+      "redirect": null,
+      "bytes": 8657,
+      "outcome": "PASS",
+      "problem": null
+    },
+    {
+      "name": "unknown Pearl id → unavailable page",
+      "url": "https://aanebed.vercel.app/p/p_0123456789abcdef",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "redirect": null,
+      "bytes": 35868,
+      "outcome": "FAIL",
+      "problem": "status 404"
+    },
+    {
+      "name": "corrupted portable payload",
+      "url": "https://aanebed.vercel.app/p/p_0123456789abcdef.AAAA",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "redirect": null,
+      "bytes": 35868,
+      "outcome": "FAIL",
+      "problem": "status 404"
+    },
+    {
+      "name": "404",
+      "url": "https://aanebed.vercel.app/no-such-page",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "redirect": null,
+      "bytes": 35868,
+      "outcome": "PASS",
+      "problem": null
+    }
+  ]
+}

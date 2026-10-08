@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aanebed.vercel.app/schemas/research-manifest.schema.json",
+  "title": "Research manifest",
+  "description": "The canonical machine-readable description of the Pearls research surface (aanebed.vercel.app): identity, research topology, protocols, experiments, repositories, claims with evidence status, evidence records and limitations.",
+  "type": "object",
+  "required": ["manifest_version", "site_version", "updated", "identity", "thesis", "taxonomy", "research", "relations", "protocols", "experiments", "repositories", "claims", "evidence", "limitations"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "manifest_version": { "const": "1.0" },
+    "site_version": { "type": "string" },
+    "updated": { "type": "string", "format": "date" },
+    "identity": {
+      "type": "object",
+      "required": ["name", "url", "description", "career", "machine_participant"],
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "career": { "type": "object", "required": ["provenance", "items"], "properties": { "provenance": { "type": "string" }, "items": { "type": "array" } } },
+        "machine_participant": { "type": "object", "required": ["author", "relation"] }
+      }
+    },
+    "thesis": { "type": "object", "required": ["term", "readings", "status", "question"] },
+    "taxonomy": {
+      "type": "object",
+      "required": ["statuses", "tiers"],
+      "properties": {
+        "statuses": { "type": "array", "items": { "type": "object", "required": ["id", "tier", "definition"], "properties": { "id": { "$ref": "#/$defs/status" }, "tier": { "$ref": "#/$defs/tier" } } } }
+      }
+    },
+    "research": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "kind", "line", "page", "repository", "machine_representation", "what", "why", "research_question", "implementation", "demonstrated", "proposed", "open", "limitations", "documents", "experiments"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "kind": { "enum": ["thesis", "protocol", "instrument", "surface", "notebook"] },
+          "repository": { "type": ["string", "null"], "format": "uri" },
+          "machine_representation": { "type": "array", "items": { "type": "string" } },
+          "demonstrated": { "type": "array", "items": { "type": "string" } },
+          "proposed": { "type": "array", "items": { "type": "string" } },
+          "open": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "relations": { "type": "array", "items": { "type": "object", "required": ["from", "to", "label", "source"] } },
+    "protocols": { "type": "array", "items": { "type": "object", "required": ["id", "node", "spec"] } },
+    "experiments": {
+      "type": "array",
+      "items": { "type": "object", "required": ["id", "name", "question", "status", "permitted", "forbidden", "entry", "evidence", "reproduce"], "properties": { "status": { "$ref": "#/$defs/status" } } }
+    },
+    "repositories": { "type": "array", "items": { "type": "object", "required": ["id", "slug", "url", "commit", "visibility"] } },
+    "claims": {
+      "type": "array",
+      "items": { "type": "object", "required": ["id", "node", "statement", "status", "tier", "evidence"], "properties": { "status": { "$ref": "#/$defs/status" }, "tier": { "$ref": "#/$defs/tier" }, "evidence": { "type": "array", "items": { "type": "string", "pattern": "^E-[0-9]{3}$" } } } }
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "object", "required": ["id", "title", "status", "observer", "date", "result"], "properties": { "id": { "type": "string", "pattern": "^E-[0-9]{3}$" }, "status": { "$ref": "#/$defs/status" } } }
+    },
+    "limitations": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+  },
+  "$defs": {
+    "status": { "enum": ["OBSERVED", "IMPLEMENTED", "TESTED", "REPRODUCED", "PROPOSED", "HYPOTHESIS", "OPEN"] },
+    "tier": { "enum": ["demonstrated", "proposed", "open"] }
+  }
+}

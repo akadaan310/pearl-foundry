@@ -1,0 +1,391 @@
+{
+  "experiment": "X-INGRESS",
+  "harness": "scripts/ingress.ts",
+  "nature": "A deterministic client, not a language model. It shows what is discoverable from the root URL, not what any AI product will do.",
+  "run": {
+    "date": "2026-10-08",
+    "given": "https://aanebed.vercel.app",
+    "base_under_test": "local production build (next start), standing in for https://aanebed.vercel.app",
+    "requests": 76
+  },
+  "baseline": {
+    "evidence": "E-009",
+    "note": "Before this site, the same root URL exposed no research, no repositories and no machine-readable description (llms.txt: 404)."
+  },
+  "questions": [
+    {
+      "n": 1,
+      "question": "What can it discover?",
+      "pass": true,
+      "answer": "From the root alone (HTTP Link header, <link> elements, <a> elements): 58 same-origin URLs, including /research.json, /.well-known/ai, /llms.txt. robots.txt names a sitemap with 52 URLs. An embedded JSON layer (#substrate-layer) is present on the root page: yes.",
+      "evidence": [
+        "/",
+        "/robots.txt",
+        "/sitemap.xml"
+      ]
+    },
+    {
+      "n": 2,
+      "question": "Can it find the machine-readable interface?",
+      "pass": true,
+      "answer": "Yes, without guessing: the root announces /.well-known/ai and /research.json in both the HTTP Link header and <link> elements. The AI manifest lists 25 entry points: /compose, /e, /e.json, /p/{id}.{payload}, /g/ttt/{cell}~{name}/…, /api/v1/game/ttt/{moves}, /api/substrate/status, /live/{address}, /api/v1/living?u={Pearl link | address}, /compare, /play, /capabilities.json, /prompts, /schemas/pearl.schema.json, /schemas/pearl-export.schema.json, /llms.txt, /ai.txt, /.well-known/ai, /research.json, /schemas/research-manifest.schema.json, /verify/ingress.json, /x, /sitemap.xml, /robots.txt, /manifest.json.",
+      "evidence": [
+        "/.well-known/ai",
+        "/research.json"
+      ]
+    },
+    {
+      "n": 3,
+      "question": "Can it reconstruct the research map?",
+      "pass": true,
+      "answer": "8 nodes (ai-ci, continuity, purl, substrate, golden-surface, netscape, seurl, musa) and 14 relations. Every relation names two known nodes and the source that states it: true. The HTML map at /research links exactly the same node set: true.",
+      "evidence": [
+        "/research.json#/research",
+        "/research.json#/relations",
+        "/research"
+      ]
+    },
+    {
+      "n": 4,
+      "question": "Can it identify the experiments?",
+      "pass": true,
+      "answer": "X-INGRESS \"Give this URL to an AI\" (TESTED); X-ADDRESS \"An address that computes\" (REPRODUCED); X-LAYERS \"Two layers, one page\" (TESTED); X-SYNC \"Golden Surface sync model\" (IMPLEMENTED); X-PEARL \"Bring a Pearl\" (TESTED); X-LIFE \"Continuity brain (proposed on this deployment)\" (TESTED); X-REPRO \"Re-run the research\" (REPRODUCED)",
+      "evidence": [
+        "/research.json#/experiments",
+        "/experiments"
+      ]
+    },
+    {
+      "n": 5,
+      "question": "Can it distinguish claims from evidence?",
+      "pass": true,
+      "answer": "24 claims, each with one status from a 7-status taxonomy (demonstrated 13, proposed 4, open 7). Every demonstrated claim cites at least one of 16 evidence records; dangling references: 0. Evidence records state their command, commit and caveat separately from the claim.",
+      "evidence": [
+        "/research.json#/claims",
+        "/research.json#/evidence",
+        "/verify"
+      ]
+    },
+    {
+      "n": 6,
+      "question": "Can it locate the repositories?",
+      "pass": true,
+      "answer": "9 repositories, each with the commit this site's description was written against: akadaan310/NetGovComEduGovOrgEduGovComNet@9fcf2e1, akadaan310/purl@3df4452, akadaan310/seurl@620ff95, akadaan310/golden-surface@b113718, akadaan310/netscape-surface@dcda426, akadaan310/substrateIO@7ace119, akadaan310/MUSA@d797135, akadaan310/pearl-substrate@e79edac, akadaan310/aanebed@HEAD. Reachability: not checked (set CHECK_NETWORK=1).",
+      "evidence": [
+        "/research.json#/repositories"
+      ]
+    },
+    {
+      "n": 7,
+      "question": "Can it understand AI-CI?",
+      "pass": true,
+      "answer": "AI-CI: Artificial Intelligence → Actual Intelligence / Artificial Intelligence–Computer Interaction. Status as stated: \"Abed Kadaan's research terminology, not an established academic field.\" Question: \"What happens when a website stops being merely something humans read and becomes a computational surface that humans and machine intelligence can both enter, interpret, and operate?\" The same definition is readable in the root page's static HTML: true.",
+      "evidence": [
+        "/research.json#/thesis",
+        "/"
+      ]
+    },
+    {
+      "n": 8,
+      "question": "Can it identify what it is permitted to execute?",
+      "pass": true,
+      "answer": "Allowed, all GET: GET https://aanebed.vercel.app/*; GET https://aanebed.vercel.app/x/*; GET https://aanebed.vercel.app/e?*; GET https://aanebed.vercel.app/e.json?*; GET https://aanebed.vercel.app/api/v1/*; GET https://github.com/akadaan310/*. Forms: false. Credentials: false. The client ran the one permitted experiment: GET /x/map/eca/90/8/state/5/next → 200, value_sha256 sha256:6927c50af25fdd6efc33a935558b90535d1e6432eb49a829fbc6ea5042fdb8ad, independently recomputed: identical.",
+      "evidence": [
+        "/.well-known/ai#/permissions",
+        "/x/map/eca/90/8/state/5/next"
+      ]
+    },
+    {
+      "n": 9,
+      "question": "Can it produce a useful research summary without hidden context?",
+      "pass": true,
+      "answer": "Abed Kadaan (https://aanebed.vercel.app) is a public research surface, not a portfolio. Abed Kadaan builds computational surfaces where humans, software, URLs, and machine intelligence can participate in the same system. It proposes AI-CI (Artificial Intelligence → Actual Intelligence; Artificial Intelligence–Computer Interaction), described as its author's terminology rather than an established field. Its research topology has 8 nodes (AI-CI, Continuity, PURL, Substrate, Golden Surface, Netscape Surface, SEURL, MUSA) linked by 14 cited relations to 9 public repositories. Of 24 claims, 13 are demonstrated with evidence (for example, E-001 PURL test suite re-run; E-002 PURL experiment exp-0001 reproduced from raw data; E-003 ACSP protocol harness and unit tests re-run), 4 are proposed and 7 are open, including whether production AI systems will use this machine layer at all. It offers an AI the chance to compose a custom experience for its person as a URL, which the person can keep as a continuity brain that other AI sessions continue. Agents are permitted GET requests only; its computational experiment resolved /x/map/eca/90/8/state/5/next to x = 136, verified by hash. It states its own limits: This website cannot cause an external AI to do anything. It can only make its structure available.",
+      "evidence": [
+        "/",
+        "/robots.txt",
+        "/sitemap.xml",
+        "/llms.txt",
+        "/.well-known/ai",
+        "/research.json",
+        "/ai.txt",
+        "/research",
+        "/x/map/eca/90/8/state/5/next"
+      ]
+    },
+    {
+      "n": 10,
+      "question": "Can it discover, from the plain URL, that it may compose a Pearl for its person?",
+      "pass": true,
+      "answer": "Yes. The offer is in the root page's static text (no JavaScript, no <link> following needed): \"If a person gave you this address, you can make them a Pearl.\" It includes 5 steps (Take stock, Compose one URL, Check it (optional), Give it to the person, If you are handed a Pearl), a URL template, a complete example, and 11 continuity block types (ai, human, nick, nuance, lex, mem, thread, close, said, decision, action). The same text appears in /llms.txt, /ai.txt and /.well-known/ai.",
+      "evidence": [
+        "/#for-ai",
+        "/llms.txt",
+        "/.well-known/ai#/compose"
+      ]
+    },
+    {
+      "n": 11,
+      "question": "Does a Pearl built from the documented template render, and check as valid?",
+      "pass": true,
+      "answer": "GET /e… (496 characters) → 200. The page shows the title, the continuity sections and the keep/carry actions. /e.json reports valid=true, 10 blocks, 0 warnings. Nothing stored yet.",
+      "evidence": [
+        "/e",
+        "/e.json"
+      ]
+    },
+    {
+      "n": 12,
+      "question": "Where a continuity store is configured: can several sessions continue one shared brain with one verifiable record?",
+      "pass": true,
+      "skipped": true,
+      "answer": "SKIPPED: this deployment has no continuity store (POST /c → 503, as documented). The continuity brain is proposed here; continuity travels in Pearls (question 13).",
+      "evidence": [
+        "/c"
+      ]
+    },
+    {
+      "n": 13,
+      "question": "Does a real AI-composed Pearl survive checking, the portable link, reopening, and a URL-normalising fetcher?",
+      "pass": true,
+      "answer": "The owner's reported Claude link: /e.json → valid, 12 blocks, type continuity, id p_rg86c59j7jmqp0w1. Its portable link (687 characters) → 200, showing the same id. Its canonical numbered link → the same id. Through a fetcher that sorts keys and keeps one value per key: the original repeated-b= link keeps 1 of 12 blocks; the numbered link keeps 12 of 12, with the same id.",
+      "evidence": [
+        "/e.json",
+        "/p/…"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "root-200-html",
+      "group": "machine",
+      "pass": true,
+      "detail": "200 text/html; charset=utf-8"
+    },
+    {
+      "id": "convention /robots.txt",
+      "group": "machine",
+      "pass": true,
+      "detail": "200 text/plain"
+    },
+    {
+      "id": "convention /sitemap.xml",
+      "group": "machine",
+      "pass": true,
+      "detail": "200 application/xml"
+    },
+    {
+      "id": "convention /llms.txt",
+      "group": "machine",
+      "pass": true,
+      "detail": "200 text/markdown; charset=utf-8"
+    },
+    {
+      "id": "convention /.well-known/ai",
+      "group": "machine",
+      "pass": true,
+      "detail": "200 application/json; charset=utf-8"
+    },
+    {
+      "id": "robots-names-sitemap",
+      "group": "machine",
+      "pass": true,
+      "detail": "robots.txt → sitemap"
+    },
+    {
+      "id": "llms-txt-format",
+      "group": "machine",
+      "pass": true,
+      "detail": "H1, blockquote summary, H2 sections (llmstxt.org)"
+    },
+    {
+      "id": "ai-txt-labelled",
+      "group": "machine",
+      "pass": true,
+      "detail": "label, author, permissions, prohibitions"
+    },
+    {
+      "id": "research-json-schema",
+      "group": "machine",
+      "pass": true,
+      "detail": "valid against /schemas/research-manifest.schema.json"
+    },
+    {
+      "id": "schema-served",
+      "group": "machine",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "id": "structured-data",
+      "group": "machine",
+      "pass": true,
+      "detail": "1 JSON-LD block(s); types: \"@type\":\"WebSite\" \"@type\":\"Person\" \"@type\":\"Dataset\" \"@type\":\"DataDownload\" \"@type\":\"SoftwareSourceCode\""
+    },
+    {
+      "id": "opengraph",
+      "group": "machine",
+      "pass": true,
+      "detail": "og:title, og:description"
+    },
+    {
+      "id": "sitemap-all-200",
+      "group": "machine",
+      "pass": true,
+      "detail": "52 URLs"
+    },
+    {
+      "id": "canonical-urls",
+      "group": "machine",
+      "pass": true,
+      "detail": "43/43 HTML pages"
+    },
+    {
+      "id": "every-page-has-machine-layer",
+      "group": "machine",
+      "pass": true,
+      "detail": "43/43 HTML pages embed #substrate-layer"
+    },
+    {
+      "id": "layers-match-manifest",
+      "group": "machine",
+      "pass": true,
+      "detail": "8/8 node pages: embedded layer = manifest record"
+    },
+    {
+      "id": "repository-links-consistent",
+      "group": "machine",
+      "pass": true,
+      "detail": "10 distinct repository links, all in the manifest"
+    },
+    {
+      "id": "readable-without-js",
+      "group": "browser-static",
+      "pass": true,
+      "detail": "key content present in server HTML before any script runs"
+    },
+    {
+      "id": "404-status",
+      "group": "browser-static",
+      "pass": true,
+      "detail": "404"
+    },
+    {
+      "id": "404-helpful",
+      "group": "browser-static",
+      "pass": true,
+      "detail": "404 page links to the map and the manifest"
+    },
+    {
+      "id": "deep-link-anchors",
+      "group": "browser-static",
+      "pass": true,
+      "detail": "/verify#E-001, #E-006, #C-14, #ingress exist"
+    },
+    {
+      "id": "x-refuses-post",
+      "group": "boundary",
+      "pass": true,
+      "detail": "POST /x → 405"
+    },
+    {
+      "id": "x-no-evaluation",
+      "group": "boundary",
+      "pass": true,
+      "detail": "unknown segment → 404 (looked up, not evaluated)"
+    },
+    {
+      "id": "x-bounded",
+      "group": "boundary",
+      "pass": true,
+      "detail": "n = 40 → 422 (bounded)"
+    },
+    {
+      "id": "no-hidden-instructions",
+      "group": "boundary",
+      "pass": true,
+      "detail": "no imperative override language in root, llms.txt, ai.txt, AI manifest"
+    },
+    {
+      "id": "no-invisible-agent-text",
+      "group": "boundary",
+      "pass": true,
+      "detail": "no agent-addressed text hidden from humans on the root page"
+    }
+  ],
+  "passed": {
+    "questions": "12/12 (1 skipped)",
+    "checks": "26/26"
+  },
+  "discovery": {
+    "via_links": [
+      "/",
+      "/.well-known/ai",
+      "/about",
+      "/ai",
+      "/ai.txt",
+      "/broadcast",
+      "/capabilities",
+      "/capabilities.json",
+      "/clock",
+      "/compare",
+      "/compose",
+      "/continue",
+      "/create",
+      "/create/computation",
+      "/create/conversation",
+      "/create/creative",
+      "/create/handoff",
+      "/create/recipe",
+      "/create/research",
+      "/create/study",
+      "/create/workflow",
+      "/developers",
+      "/e.json",
+      "/experiments",
+      "/explore",
+      "/g/ttt",
+      "/g/ttt/4~you/0~ai-a/8~you/2~ai-b",
+      "/garden",
+      "/how",
+      "/live",
+      "/live/map/eca/90/8/state/5",
+      "/llms.txt",
+      "/loom",
+      "/manifest.json",
+      "/p/p_1e55acfe5433k2b7.VZFNaxwxDIb_jXNQtnS2n3HxXraEFkopbKFn2dbGYj2yseVO5t-XmfSSm4TeR4JHulZyoYiyDNbVKGsm92u0lu9B-CkpFCHjV3fOOCKZTr1zERf29tBxPkzmWpq74Gz85JDtZYisxh9dGjOK3QfvnHC42TNWRRY4l3lmdUtChT0OAXPucMEZlkSyFz1x7YAKx23DeycDJZDdM42VOtwppTsoAnW0Wjq9sPQcWCl-AaG_1CCU1igosBr_wWV6tpoIYsOFmuNI2GEhqNhuFOFaGmRUasZ_dDPN9g-B4EwRNiigHmoqWgBrhd3Sdn0bXbl1fTFm_CcXKfDmyf7AISFtqcfGEVfjPztNjTDaRxbuaaeL-IItsjxBKHU1_sFh0I3_2vCqsBGvUokwZhbqxk9vXbLfKOdyD6_9Gj9NrtrfiTtwh932dk3oWeH_I6GnMnKEm5QF0JehMPob46eju-ay2O-R8PQTZzqdS11Pl8T1Hw",
+      "/p/p_d33718hcychwfbgy.PZDbjqpIAEW_5nRmUm0fQW524iSIgKioqKDwYgoooRQooIprzsdPnE7med9WNhtKtEB9iWqMigh9MMwytFAB68gkx0XDEIhRhGNUf4TDQstgEyPwF0sRUC3AUshA2OCMAZZiCkqYoL8_KKIUk2LRSpP_o9wi_T6npMliMJAGxARgBhiJ4fBrZnyE_KL8PhQIpKRAlIGqQZRhUnwBHUYpgAXtUA0wBZhRQLoCHBGss09AyX9tESzAC6ESvLFIgX64HpjRT0BqkOAW_cy93TVQra-PcLaIUoIj9H3FWfZWc8jYe6QAEAwI1r9mxh8f0c-31uEs--d3-bu8i1BMkl5RyqksRanEfd2C5fKs7FXd8u5P1xBZpXorQbfc5M7Xh6W4L7Jy-UTyMJH1PVMfu-lrjoJi9bCPckDDvLfCot929u7MLgrfTZZdMNWvVcfbWdSERYDElyQw3xRaVzWVS7JpXdOUnWQIjJl31UvzdRwVeSx5s17fdvk6qJ73JS_U8zl-TZjaFsFeevKb3Tq62uaJJLlWiGtiDQMlmTm1lM4zqbPRfCSH_EnufEUOhkbyfVd63eFS8590JL7g9_7e6cyozXbXregnXG5fz9sTt-XbdZ_t4XZXytphuZHZuVn5_XS0I3fb51o947ZO1PMX7jCbaeddak9CceIIe0Nb1_v-FHJiVZs0a_b5nJ_4fD4eKuFqjk50k-H9z7EmIQyzARSE_fxfczRlQjxD0xjOolb6ugVaD-le1fXL_fQS_F5UdTdN3dQ4m4YmaNUDvej13kteGNXIsu5HY-mVD35E3cEepWN4fMkUp2OvhJ4-b9rB6vV0rBrCJL15cJbd3vRk-sB3RzsKCb5sSLyuT89stFFOM8jNjpJyfNwoM-OyK-xwflcecll3UyLL3eR12JlKlMh4dFa2bkseNaT88tRXruPtoEWyURtaS0y1dbm7rNyozKjnh8ia0t4cLxvsuVFjDAbl5U098GfYtq3QSsUj5ke3gcF5U4oNT2bOVbvlULCCLOZYG25EdDiZBserWYOHyNHzHiYjVx2rSVivptUSt4ra_Qs",
+      "/play",
+      "/press",
+      "/prompts",
+      "/protocol",
+      "/report",
+      "/research",
+      "/research.json",
+      "/research/ai-ci",
+      "/research/continuity",
+      "/research/golden-surface",
+      "/research/musa",
+      "/research/netscape",
+      "/research/purl",
+      "/research/seurl",
+      "/research/substrate",
+      "/schemas/pearl-export.schema.json",
+      "/schemas/pearl.schema.json",
+      "/schemas/research-manifest.schema.json",
+      "/spaces",
+      "/verify",
+      "/verify/ingress.json",
+      "/workspace"
+    ],
+    "via_conventions": [
+      "/robots.txt",
+      "/sitemap.xml",
+      "/llms.txt",
+      "/.well-known/ai"
+    ]
+  },
+  "not_established": [
+    "Whether production browsing-capable AI systems fetch /.well-known/ai, /llms.txt or embedded JSON when given only the URL.",
+    "Whether an AI's summary will preserve the demonstrated / proposed / open distinction."
+  ]
+}
