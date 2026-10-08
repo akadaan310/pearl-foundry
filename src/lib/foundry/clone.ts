@@ -97,6 +97,8 @@ export interface ComposeOptions {
   /** parent genome id when re-minting (update flow) */
   from?: string;
   now?: Date;
+  /** origin to stamp on the DNA URL; callers in the browser pass window.location.origin */
+  origin?: string;
 }
 
 /**
@@ -160,7 +162,7 @@ export async function composeGenome(pasted: string, opts: ComposeOptions = {}): 
   if (!hasEmotionalRegister) warnings.push("No emotional register captured (a nuance: line about frustration vs curiosity).");
   if (!counts["mem"]) warnings.push("No mem: lines — the genome remembers nothing yet.");
 
-  const { id, path, url } = await encodePortable(pearl);
+  const { id, path, url } = await encodePortable(pearl, opts.origin);
   return {
     pearl, id, path, url, mintedAt,
     checklist: { aiName, model, counts, nevers, hasDisagreementTone, hasEmotionalRegister, warnings },

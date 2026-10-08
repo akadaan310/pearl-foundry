@@ -53,13 +53,16 @@ npm run dev        # http://localhost:3000
 npm run verify     # typecheck + unit tests + build
 ```
 
-## Point it at a substrate
+## Point it at a substrate (optional — the site works with zero env vars)
+
+The origin self-resolves and DNA URLs are stamped with the actual deployment
+origin at mint time, so no configuration is needed to deploy. These two only
+light up the live substrate connection:
 
 ```bash
 # .env.local (server-only; never commit)
 PEARL_SUBSTRATE_URL=https://your-substrate.example.com
 PEARL_API_KEY=<a server-held bearer token>   # optional: enables substrate-backed states
-NEXT_PUBLIC_SITE_ORIGIN=https://your-domain.vercel.app
 ```
 
 - `PEARL_SUBSTRATE_URL` must be `https:` (or localhost `http:`). The status page reports

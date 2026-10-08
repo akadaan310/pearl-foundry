@@ -54,7 +54,12 @@ export function CloneFlow() {
   const mint = async () => {
     setBusy(true); setErr(null);
     try {
-      const g = await composeGenome(reply, parentId ? { from: parentId } : undefined);
+      // The DNA URL is stamped with this deployment's actual origin at mint
+      // time — no environment variable needed, on any domain.
+      const g = await composeGenome(reply, {
+        ...(parentId ? { from: parentId } : null),
+        origin: typeof window !== "undefined" ? window.location.origin : undefined,
+      });
       setGenome(g); setStep(4); play("return");
       record({ kind: "made", url: g.path, title: g.pearl.title, parent: parentId ? `/p/${parentId}` : null });
     } catch (e) { setErr((e as Error).message); play("unsure"); }

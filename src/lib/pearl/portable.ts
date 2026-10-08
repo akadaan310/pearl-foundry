@@ -46,12 +46,14 @@ async function pipe(data: Uint8Array, stream: CompressionStream | DecompressionS
   return out;
 }
 
-export async function encodePortable(p: Pearl): Promise<{ id: string; token: string; path: string; url: string }> {
+export async function encodePortable(p: Pearl, origin?: string): Promise<{ id: string; token: string; path: string; url: string }> {
   const q = new TextEncoder().encode(pearlQuery(p));
   const token = toB64url(await pipe(q, new CompressionStream("deflate-raw")));
   const id = pearlId(p);
   const path = `/p/${id}.${token}`;
-  return { id, token, path, url: ORIGIN + path };
+  // An explicit origin (e.g. window.location.origin at mint time) always wins:
+  // a minted link points at the deployment it was minted on, no env var needed.
+  return { id, token, path, url: (origin || ORIGIN) + path };
 }
 
 /** Inflate a payload back into the query string it encodes. Throws on malformed or oversized input. */

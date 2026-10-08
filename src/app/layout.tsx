@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Source_Serif_4, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
+// Self-hosted fonts (public/fonts/): no build-time fetch to Google Fonts,
+// so cold builds (Vercel) never depend on the font pipeline or the network.
 import "./globals.css";
 import { Header, Footer } from "@/components/Chrome";
 import { JsonLd } from "@/components/Substrate";
@@ -8,9 +10,29 @@ import { MODE_BOOT } from "@/components/ModeSwitch";
 import { SITE } from "@/content/site";
 import { REPOSITORIES } from "@/content/repositories";
 
-const serif = Source_Serif_4({ subsets: ["latin"], variable: "--font-source-serif", display: "swap", axes: ["opsz"] });
-const sans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-plex-sans", display: "swap" });
-const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-plex-mono", display: "swap" });
+const serif = localFont({
+  src: "../../public/fonts/sourceserif4-400.woff2",
+  variable: "--font-source-serif",
+  display: "swap",
+  weight: "400 700",
+});
+const sans = localFont({
+  src: [
+    { path: "../../public/fonts/ibmplexsans-400.woff2", weight: "400" },
+    { path: "../../public/fonts/ibmplexsans-500.woff2", weight: "500" },
+    { path: "../../public/fonts/ibmplexsans-600.woff2", weight: "600" },
+  ],
+  variable: "--font-plex-sans",
+  display: "swap",
+});
+const mono = localFont({
+  src: [
+    { path: "../../public/fonts/ibmplexmono-400.woff2", weight: "400" },
+    { path: "../../public/fonts/ibmplexmono-500.woff2", weight: "500" },
+  ],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.origin),
